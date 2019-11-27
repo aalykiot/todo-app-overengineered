@@ -60,6 +60,16 @@ router.put('/:todoId', async (req, res, next) => {
   }
 });
 
+router.delete('/completed', async (req, res, next) => {
+  try {
+    const deletedTodos = await Todo.find({ completed: true });
+    await Todo.deleteMany({ completed: true });
+    res.send(deletedTodos);
+  } catch (err) {
+    next(boom.badImplementation().output);
+  }
+});
+
 router.delete('/:todoId', async (req, res, next) => {
   const { todoId } = req.params;
 

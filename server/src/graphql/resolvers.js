@@ -24,6 +24,11 @@ const resolvers = {
     removeTodo(_, { id }) {
       return superagent.delete(`${BASE_URL}/todos/${id}`).then(res => res.body);
     },
+    removeCompleted() {
+      return superagent
+        .delete(`${BASE_URL}/todos/completed`)
+        .then(res => res.body);
+    },
   },
   Todo: {
     id: todo => todo._id,
