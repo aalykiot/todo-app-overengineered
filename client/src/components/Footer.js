@@ -8,6 +8,7 @@ import {
   activeTodosSelector,
   filterSelector,
   setFilter,
+  removeCompleted,
 } from '../models/todos';
 
 const filters = [
@@ -16,7 +17,13 @@ const filters = [
   { text: 'Completed', value: 'completed' },
 ];
 
-const Footer = ({ totalTodos, activeTodos, filter, setFilter }) => {
+const Footer = ({
+  totalTodos,
+  activeTodos,
+  filter,
+  setFilter,
+  removeCompleted,
+}) => {
   //
   const renderFilters = () => (
     <React.Fragment>
@@ -45,7 +52,9 @@ const Footer = ({ totalTodos, activeTodos, filter, setFilter }) => {
             <span>left</span>
           </span>
           <ul className="filters">{renderFilters()}</ul>
-          <button className="clear-completed">Clear completed</button>
+          <button className="clear-completed" onClick={removeCompleted}>
+            Clear completed
+          </button>
         </footer>
       )}
     </React.Fragment>
@@ -60,6 +69,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setFilter: bindActionCreators(setFilter, dispatch),
+  removeCompleted: bindActionCreators(removeCompleted, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);

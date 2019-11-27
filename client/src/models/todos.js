@@ -19,6 +19,11 @@ export const toggleTodoSuccess = createAction('todos/TOGGLE_TODO_SUCCESS');
 export const removeTodo = createAction('todos/REMOVE_TODO');
 export const removeTodoSuccess = createAction('todos/REMOVE_TODO_SUCCESS');
 
+export const removeCompleted = createAction('todos/REMOVE_COMPLETED');
+export const removeCompletedSuccess = createAction(
+  'todos/REMOVE_COMPLETED_SUCCESS'
+);
+
 const initState = {
   items: [],
   filter: null,
@@ -42,6 +47,11 @@ export default createReducer(initState, {
   },
   [removeTodoSuccess.type]: (state, { payload }) => {
     state.items = state.items.filter(todo => todo._id !== payload._id);
+  },
+  [removeCompletedSuccess.type]: (state, { payload }) => {
+    state.items = state.items.filter(
+      todo => payload.map(t => t._id).indexOf(todo._id) === -1
+    );
   },
 });
 
@@ -101,6 +111,16 @@ epics.removeTodo = action$ =>
     switchMap(todo =>
       from(superagent.delete(`${BASE_URL}/todos/${todo._id}`)).pipe(
         map(res => removeTodoSuccess(res.body))
+      )
+    )
+  );
+
+epics.removeCompleted = action$ =>
+  action$.pipe(
+    ofType(removeCompleted.type),
+    switchMap(() =>
+      from(superagent.delete(`${BASE_URL}/todos/completed`)).pipe(
+        map(res => removeCompletedSuccess(res.body))
       )
     )
   );
