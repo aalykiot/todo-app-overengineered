@@ -1,32 +1,65 @@
 import React from 'react';
+import classNames from 'classnames';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-const Footer = () => (
-  <footer className="footer">
-    <span className="todo-count">
-      <strong>1</strong>
-      <span> </span>
-      <span>item </span>
-      <span>left</span>
-    </span>
-    <ul className="filters">
-      <li>
-        <a href="/" className="selected">
-          All
-        </a>
-      </li>
-      <li>
-        <a href="/" className="">
-          Active
-        </a>
-      </li>
-      <li>
-        <a href="/" className="">
-          Completed
-        </a>
-      </li>
-    </ul>
-    <button className="clear-completed">Clear completed</button>
-  </footer>
-);
+import {
+  totalTodosSelector,
+  activeTodosSelector,
+  filterSelector,
+  setFilter,
+} from '../models/todos';
 
-export default Footer;
+const filters = [
+  { text: 'All', value: null },
+  { text: 'Active', value: 'active' },
+  { text: 'Completed', value: 'completed' },
+];
+
+const Footer = ({ totalTodos, activeTodos, filter, setFilter }) => {
+  //
+  const renderFilters = () => (
+    <React.Fragment>
+      {filters.map(item => (
+        <li>
+          <a
+            href="#/"
+            className={classNames({ selected: filter === item.value })}
+            onClick={() => setFilter(item.value)}
+          >
+            {item.text}
+          </a>
+        </li>
+      ))}
+    </React.Fragment>
+  );
+
+  return (
+    <React.Fragment>
+      {totalTodos > 0 && (
+        <footer className="footer">
+          <span className="todo-count">
+            <strong>{activeTodos} </strong>
+            <span> </span>
+            <span>{activeTodos === 1 ? 'item' : 'items'} </span>
+            <span>left</span>
+          </span>
+          <ul className="filters">{renderFilters()}</ul>
+          <button className="clear-completed">Clear completed</button>
+        </footer>
+      )}
+    </React.Fragment>
+  );
+};
+
+const mapStateToProps = state => ({
+  totalTodos: totalTodosSelector(state),
+  activeTodos: activeTodosSelector(state),
+  filter: filterSelector(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  setFilter: bindActionCreators(setFilter, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

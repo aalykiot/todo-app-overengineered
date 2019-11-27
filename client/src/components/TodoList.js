@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import Todo from './Todo';
 
 import { todosSelector } from '../models/todos';
-import { toggleTodo, removeTodo } from '../models/todos';
+import { toggleTodo, removeTodo, filterSelector } from '../models/todos';
 
-const TodoList = ({ todos, toggleTodo, removeTodo }) => {
+const TodoList = ({ todos, filter, toggleTodo, removeTodo }) => {
   //
   const renderTodos = () => {
     //
@@ -20,6 +20,16 @@ const TodoList = ({ todos, toggleTodo, removeTodo }) => {
         {todos
           .slice()
           .reverse()
+          .filter(todo => {
+            switch (filter) {
+              case 'active':
+                return !todo.completed;
+              case 'completed':
+                return todo.completed;
+              default:
+                return true;
+            }
+          })
           .map(todo => (
             <Todo
               key={todo._id}
@@ -44,6 +54,7 @@ const TodoList = ({ todos, toggleTodo, removeTodo }) => {
 
 const mapStateToProps = state => ({
   todos: todosSelector(state),
+  filter: filterSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({

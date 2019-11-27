@@ -5,6 +5,8 @@ import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 // Actions
+export const setFilter = createAction('todos/SET_FILTER');
+
 export const loadTodos = createAction('todos/LOAD_TODOS');
 export const loadTodosSuccess = createAction('todos/LOAD_TODOS_SUCCESS');
 
@@ -19,10 +21,14 @@ export const removeTodoSuccess = createAction('todos/REMOVE_TODO_SUCCESS');
 
 const initState = {
   items: [],
+  filter: null,
 };
 
 // Reducer
 export default createReducer(initState, {
+  [setFilter.type]: (state, { payload }) => {
+    state.filter = payload;
+  },
   [loadTodosSuccess.type]: (state, { payload }) => {
     state.items = payload;
   },
@@ -41,6 +47,10 @@ export default createReducer(initState, {
 
 // Selectors
 export const todosSelector = state => state.todos.items;
+export const totalTodosSelector = state => state.todos.items.length;
+export const activeTodosSelector = state =>
+  state.todos.items.filter(todos => !todos.completed).length;
+export const filterSelector = state => state.todos.filter;
 
 // Epics
 const BASE_URL = 'http://localhost:5000/api';
