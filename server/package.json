@@ -1,0 +1,40 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "start:dev": "nodemon index",
+    "clean": "rm -rf node_modules/",
+    "compose": "docker-compose up -d",
+    "compose:logs": "docker-compose logs --tail=0 -f database",
+    "compose:stop": "docker-compose stop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^12.12.14",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "dependencies": {
+    "@hapi/boom": "^8.0.1",
+    "body-parser": "^1.19.0",
+    "chalk": "^3.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql-import": "^0.7.1",
+    "graphql-tools": "^4.0.6",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
+    "superagent": "^5.1.1"
+  }
+}
