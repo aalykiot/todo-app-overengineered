@@ -15,10 +15,10 @@ const resolvers = {
         .send({ text })
         .then(res => res.body);
     },
-    updateTodo(_, { id, completed }) {
+    updateTodo(_, { id, todo }) {
       return superagent
         .put(`${BASE_URL}/todos/${id}`)
-        .send({ completed })
+        .send({ todo })
         .then(res => res.body);
     },
     removeTodo(_, { id }) {

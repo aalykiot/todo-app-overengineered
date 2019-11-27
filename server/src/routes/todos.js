@@ -40,9 +40,9 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:todoId', async (req, res, next) => {
   const { todoId } = req.params;
-  const { completed } = req.body;
+  const { todo } = req.body;
 
-  if (!todoId) {
+  if (!todoId || !todo) {
     next(boom.badData().output);
     return;
   }
@@ -50,7 +50,7 @@ router.put('/:todoId', async (req, res, next) => {
   try {
     const updatedTodo = await Todo.findByIdAndUpdate(
       todoId,
-      { completed },
+      { ...todo },
       { new: true },
     );
     res.send(updatedTodo);
