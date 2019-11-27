@@ -1,17 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { createEpicMiddleware } from 'redux-observable';
 
-import todosReducer from '../models/todos';
-
-import { epics as todosEpics } from '../models/todos';
-
-const rootReducer = {
-  todos: todosReducer,
-};
-
-const rootEpics = combineEpics(
-  ...Object.values(Object.assign({}, ...[todosEpics]))
-);
+import rootReducer from '../models/reducers';
+import rootEpics from '../models/epics';
 
 const epicMiddleware = createEpicMiddleware();
 

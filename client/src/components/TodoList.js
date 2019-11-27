@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import Todo from './Todo';
 
-import { todosSelector } from '../models/todos';
-import { toggleTodo, removeTodo, filterSelector } from '../models/todos';
+import { todosSelector, filterSelector } from '../models/todos/selectors';
+import { toggleTodo, removeTodo } from '../models/todos/actions';
 
 const TodoList = ({ todos, filter, toggleTodo, removeTodo }) => {
   //

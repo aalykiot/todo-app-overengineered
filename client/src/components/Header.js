@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { addTodo } from '../models/todos';
+import { addTodo } from '../models/todos/actions';
 
 const Header = ({ addTodo }) => {
   const [value, setValue] = useState('');

@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { setFilter, removeCompleted } from '../models/todos/actions';
+
 import {
   totalTodosSelector,
   activeTodosSelector,
   filterSelector,
-  setFilter,
-  removeCompleted,
-} from '../models/todos';
+} from '../models/todos/selectors';
 
 const filters = [
   { text: 'All', value: null },
