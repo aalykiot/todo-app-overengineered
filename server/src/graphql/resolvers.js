@@ -30,9 +30,6 @@ const resolvers = {
         .then(res => res.body);
     },
   },
-  Todo: {
-    id: todo => todo._id,
-  },
 };
 
 export default resolvers;
