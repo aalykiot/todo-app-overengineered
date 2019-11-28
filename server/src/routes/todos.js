@@ -34,6 +34,18 @@ router.post('/', async (req, res, next) => {
 
     res.send(todo);
   } catch (err) {
+    console.error(err);
+    next(boom.badImplementation().output);
+  }
+});
+
+router.put('/not-completed', async (req, res, next) => {
+  try {
+    const updatedTodos = await Todo.find({ completed: false });
+    await Todo.updateMany({}, { completed: true });
+    res.send(updatedTodos);
+  } catch (err) {
+    console.error(err);
     next(boom.badImplementation().output);
   }
 });
@@ -66,6 +78,7 @@ router.delete('/completed', async (req, res, next) => {
     await Todo.deleteMany({ completed: true });
     res.send(deletedTodos);
   } catch (err) {
+    console.error(err);
     next(boom.badImplementation().output);
   }
 });
@@ -83,6 +96,7 @@ router.delete('/:todoId', async (req, res, next) => {
     await Todo.findByIdAndRemove(todoId);
     res.send(deletedTodo);
   } catch (err) {
+    console.error(err);
     next(boom.badImplementation().output);
   }
 });

@@ -21,6 +21,11 @@ const resolvers = {
         .send({ todo })
         .then(res => res.body);
     },
+    updateNotCompleted() {
+      return superagent
+        .put(`${BASE_URL}/todos/not-completed`)
+        .then(res => res.body);
+    },
     removeTodo(_, { id }) {
       return superagent.delete(`${BASE_URL}/todos/${id}`).then(res => res.body);
     },
