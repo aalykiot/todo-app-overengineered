@@ -3,6 +3,7 @@ import graphqlHTTP from 'express-graphql';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import playground from 'graphql-playground-middleware-express';
 import { importSchema } from 'graphql-import';
 import { makeExecutableSchema } from 'graphql-tools';
 import boom from '@hapi/boom';
@@ -35,13 +36,8 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  }),
-);
+app.use('/graphql', graphqlHTTP({ schema }));
+app.use('/playground', playground({ endpoint: '/graphql' }));
 
 app.use((req, res, next) => {
   next(boom.notFound().output);
