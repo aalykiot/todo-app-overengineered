@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -9,11 +10,21 @@ import {
   filterSelector,
   activeTodosSelector,
 } from '../models/todos/selectors';
+
 import {
   toggleTodoRequest,
   toggleAllRequest,
   removeTodoRequest,
 } from '../models/todos/actions';
+
+const propTypes = {
+  todos: PropTypes.array,
+  activeTodos: PropTypes.number,
+  filter: PropTypes.string,
+  toggleTodoRequest: PropTypes.func,
+  toggleAllRequest: PropTypes.func,
+  removeTodoRequest: PropTypes.func,
+};
 
 const TodoList = ({
   todos,
@@ -73,6 +84,8 @@ const TodoList = ({
     </section>
   );
 };
+
+TodoList.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   todos: todosSelector(state),

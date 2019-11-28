@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { addTodoRequest } from '../models/todos/actions';
+
+const propTypes = {
+  addTodoRequest: PropTypes.func,
+};
 
 const Header = ({ addTodoRequest }) => {
   const [value, setValue] = useState('');
@@ -29,6 +34,8 @@ const Header = ({ addTodoRequest }) => {
     </header>
   );
 };
+
+Header.propTypes = propTypes;
 
 const mapStateToProps = () => ({});
 

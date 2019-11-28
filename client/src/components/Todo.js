@@ -1,5 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+const propTypes = {
+  todo: PropTypes.object,
+  handleOnChange: PropTypes.func,
+  handleRemove: PropTypes.func,
+};
 
 const Todo = ({ todo, handleOnChange, handleRemove }) => (
   <li className={classNames({ completed: todo.completed })}>
@@ -15,5 +22,7 @@ const Todo = ({ todo, handleOnChange, handleRemove }) => (
     </div>
   </li>
 );
+
+Todo.propTypes = propTypes;
 
 export default Todo;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,6 +12,15 @@ import {
   activeTodosSelector,
   filterSelector,
 } from '../models/todos/selectors';
+
+const propTypes = {
+  totalTodos: PropTypes.array,
+  activeTodos: PropTypes.number,
+  completedTodos: PropTypes.number,
+  filter: PropTypes.string,
+  setFilter: PropTypes.func,
+  removeCompletedRequest: PropTypes.func,
+};
 
 const filters = [
   { text: 'All', value: null },
@@ -66,6 +76,8 @@ const Footer = ({
     </React.Fragment>
   );
 };
+
+Footer.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   totalTodos: totalTodosSelector(state),
