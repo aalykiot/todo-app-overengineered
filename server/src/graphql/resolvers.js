@@ -21,9 +21,14 @@ const resolvers = {
         .send({ todo })
         .then(res => res.body);
     },
-    updateNotCompleted() {
+    toggleTodo(_, { id }) {
       return superagent
-        .put(`${BASE_URL}/todos/not-completed`)
+        .put(`${BASE_URL}/todos/toggle/${id}`)
+        .then(res => res.body);
+    },
+    toggleAll() {
+      return superagent
+        .put(`${BASE_URL}/todos/toggle-all`)
         .then(res => res.body);
     },
     removeTodo(_, { id }) {

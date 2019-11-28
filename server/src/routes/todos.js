@@ -39,11 +39,35 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/not-completed', async (req, res, next) => {
+router.put('/toggle/:todoId', async (req, res, next) => {
+  const { todoId } = req.params;
+
+  if (!todoId) {
+    next(boom.badData().output);
+    return;
+  }
+
   try {
-    const updatedTodos = await Todo.find({ completed: false });
-    await Todo.updateMany({}, { completed: true });
-    res.send(updatedTodos);
+    const doc = await Todo.findById(todoId);
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      todoId,
+      { completed: !doc.completed },
+      { new: true },
+    );
+    res.send(updatedTodo);
+  } catch (err) {
+    console.error(err);
+    next(boom.badImplementation().output);
+  }
+});
+
+router.put('/toggle-all', async (req, res, next) => {
+  try {
+    const activeTodos = await Todo.count({ completed: false });
+    await Todo.updateMany({}, { completed: activeTodos > 0 });
+
+    const todos = await Todo.find({});
+    res.send(todos);
   } catch (err) {
     console.error(err);
     next(boom.badImplementation().output);
