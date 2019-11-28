@@ -4,19 +4,17 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import playground from 'graphql-playground-middleware-express';
+import boom from '@hapi/boom';
 import { importSchema } from 'graphql-import';
 import { makeExecutableSchema } from 'graphql-tools';
-import boom from '@hapi/boom';
+
 import log from './utils/log';
-
-import './models/todo';
-
 import indexRouter from './routes/index';
 import todosRouter from './routes/todos';
-
-import './config/connection';
-
 import resolvers from './graphql/resolvers';
+
+import './models/todo';
+import './config/connection';
 
 const app = express();
 
