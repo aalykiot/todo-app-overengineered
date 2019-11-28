@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { setFilter, removeCompleted } from '../models/todos/actions';
+import { setFilter, removeCompletedRequest } from '../models/todos/actions';
 
 import {
   totalTodosSelector,
@@ -22,13 +22,12 @@ const Footer = ({
   activeTodos,
   filter,
   setFilter,
-  removeCompleted,
+  removeCompletedRequest,
 }) => {
-  //
   const renderFilters = () => (
     <React.Fragment>
       {filters.map(item => (
-        <li>
+        <li key={item.value}>
           <a
             href="#/"
             className={classNames({ selected: filter === item.value })}
@@ -52,7 +51,7 @@ const Footer = ({
             <span>left</span>
           </span>
           <ul className="filters">{renderFilters()}</ul>
-          <button className="clear-completed" onClick={removeCompleted}>
+          <button className="clear-completed" onClick={removeCompletedRequest}>
             Clear completed
           </button>
         </footer>
@@ -69,7 +68,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setFilter: bindActionCreators(setFilter, dispatch),
-  removeCompleted: bindActionCreators(removeCompleted, dispatch),
+  removeCompletedRequest: bindActionCreators(removeCompletedRequest, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);

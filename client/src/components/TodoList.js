@@ -5,12 +5,10 @@ import { bindActionCreators } from 'redux';
 import Todo from './Todo';
 
 import { todosSelector, filterSelector } from '../models/todos/selectors';
-import { toggleTodo, removeTodo } from '../models/todos/actions';
+import { toggleTodoRequest, removeTodoRequest } from '../models/todos/actions';
 
-const TodoList = ({ todos, filter, toggleTodo, removeTodo }) => {
-  //
+const TodoList = ({ todos, filter, toggleTodoRequest, removeTodoRequest }) => {
   const renderTodos = () => {
-    //
     if (!todos) {
       return <React.Fragment />;
     }
@@ -33,10 +31,9 @@ const TodoList = ({ todos, filter, toggleTodo, removeTodo }) => {
           .map(todo => (
             <Todo
               key={todo._id}
-              text={todo.text}
-              completed={todo.completed}
-              handleOnChange={() => toggleTodo(todo)}
-              handleRemove={() => removeTodo(todo)}
+              todo={todo}
+              handleOnChange={() => toggleTodoRequest(todo)}
+              handleRemove={() => removeTodoRequest(todo)}
             />
           ))}
       </React.Fragment>
@@ -58,8 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleTodo: bindActionCreators(toggleTodo, dispatch),
-  removeTodo: bindActionCreators(removeTodo, dispatch),
+  toggleTodoRequest: bindActionCreators(toggleTodoRequest, dispatch),
+  removeTodoRequest: bindActionCreators(removeTodoRequest, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -4,15 +4,15 @@ import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import {
-  loadTodos,
+  loadTodosRequest,
   loadTodosSuccess,
-  addTodo,
+  addTodoRequest,
   addTodoSuccess,
-  toggleTodo,
+  toggleTodoRequest,
   toggleTodoSuccess,
-  removeTodo,
+  removeTodoRequest,
   removeTodoSuccess,
-  removeCompleted,
+  removeCompletedRequest,
   removeCompletedSuccess,
 } from './actions';
 
@@ -20,7 +20,7 @@ const BASE_URL = 'http://localhost:5000/api';
 
 export const loadTodosEpic = action$ =>
   action$.pipe(
-    ofType(loadTodos.type),
+    ofType(loadTodosRequest.type),
     switchMap(() =>
       from(superagent.get(`${BASE_URL}/todos`)).pipe(
         map(res => loadTodosSuccess(res.body))
@@ -30,7 +30,7 @@ export const loadTodosEpic = action$ =>
 
 export const addTodoEpic = action$ =>
   action$.pipe(
-    ofType(addTodo.type),
+    ofType(addTodoRequest.type),
     map(action => action.payload),
     switchMap(text =>
       from(superagent.post(`${BASE_URL}/todos`).send({ text })).pipe(
@@ -41,7 +41,7 @@ export const addTodoEpic = action$ =>
 
 export const toggleTodoEpic = action$ =>
   action$.pipe(
-    ofType(toggleTodo.type),
+    ofType(toggleTodoRequest.type),
     map(action => action.payload),
     switchMap(todo =>
       from(
@@ -57,7 +57,7 @@ export const toggleTodoEpic = action$ =>
 
 export const removeTodoEpic = action$ =>
   action$.pipe(
-    ofType(removeTodo.type),
+    ofType(removeTodoRequest.type),
     map(action => action.payload),
     switchMap(todo =>
       from(superagent.delete(`${BASE_URL}/todos/${todo._id}`)).pipe(
@@ -68,7 +68,7 @@ export const removeTodoEpic = action$ =>
 
 export const removeCompletedEpic = action$ =>
   action$.pipe(
-    ofType(removeCompleted.type),
+    ofType(removeCompletedRequest.type),
     switchMap(() =>
       from(superagent.delete(`${BASE_URL}/todos/completed`)).pipe(
         map(res => removeCompletedSuccess(res.body))

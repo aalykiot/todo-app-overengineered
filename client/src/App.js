@@ -6,8 +6,9 @@ import TodoList from './components/TodoList';
 import Footer from './components/Footer';
 
 import store from './store/configureStore';
+import { loadTodosRequest } from './models/todos/actions';
 
-store.dispatch({ type: 'todos/LOAD_TODOS' });
+store.dispatch(loadTodosRequest());
 
 const App = () => (
   <Provider store={store}>

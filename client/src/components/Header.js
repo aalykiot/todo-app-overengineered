@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { addTodo } from '../models/todos/actions';
+import { addTodoRequest } from '../models/todos/actions';
 
-const Header = ({ addTodo }) => {
+const Header = ({ addTodoRequest }) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    addTodo(value);
+    if (!value) return;
+
+    addTodoRequest(value);
     setValue('');
   };
 
@@ -31,7 +33,7 @@ const Header = ({ addTodo }) => {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  addTodo: bindActionCreators(addTodo, dispatch),
+  addTodoRequest: bindActionCreators(addTodoRequest, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
