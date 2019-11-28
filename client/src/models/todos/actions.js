@@ -11,6 +11,9 @@ export const addTodoSuccess = createAction('todos/ADD_TODO_SUCCESS');
 export const toggleTodoRequest = createAction('todos/TOGGLE_TODO_REQUEST');
 export const toggleTodoSuccess = createAction('todos/TOGGLE_TODO_SUCCESS');
 
+export const toggleAllRequest = createAction('todos/TOGGLE_ALL_REQUEST');
+export const toggleAllSuccess = createAction('todos/TOGGLE_ALL_SUCCESS');
+
 export const removeTodoRequest = createAction('todos/REMOVE_TODO_REQUEST');
 export const removeTodoSuccess = createAction('todos/REMOVE_TODO_SUCCESS');
 

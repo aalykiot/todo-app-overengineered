@@ -4,6 +4,7 @@ import {
   loadTodosSuccess,
   addTodoSuccess,
   toggleTodoSuccess,
+  toggleAllSuccess,
   removeTodoSuccess,
   removeCompletedSuccess,
   setFilter,
@@ -28,6 +29,9 @@ export default createReducer(initState, {
     state.items = state.items.map(todo =>
       todo._id === payload._id ? payload : todo
     );
+  },
+  [toggleAllSuccess.type]: (state, { payload }) => {
+    state.items = payload;
   },
   [removeTodoSuccess.type]: (state, { payload }) => {
     state.items = state.items.filter(todo => todo._id !== payload._id);

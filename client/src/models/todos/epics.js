@@ -10,6 +10,8 @@ import {
   addTodoSuccess,
   toggleTodoRequest,
   toggleTodoSuccess,
+  toggleAllRequest,
+  toggleAllSuccess,
   removeTodoRequest,
   removeTodoSuccess,
   removeCompletedRequest,
@@ -52,6 +54,16 @@ export const toggleTodoEpic = action$ =>
           },
         })
       ).pipe(map(res => toggleTodoSuccess(res.body)))
+    )
+  );
+
+export const toggleAllEpic = action$ =>
+  action$.pipe(
+    ofType(toggleAllRequest.type),
+    switchMap(() =>
+      from(superagent.put(`${BASE_URL}/todos/toggle-all`)).pipe(
+        map(res => toggleAllSuccess(res.body))
+      )
     )
   );
 

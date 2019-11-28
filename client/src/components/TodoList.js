@@ -4,10 +4,25 @@ import { bindActionCreators } from 'redux';
 
 import Todo from './Todo';
 
-import { todosSelector, filterSelector } from '../models/todos/selectors';
-import { toggleTodoRequest, removeTodoRequest } from '../models/todos/actions';
+import {
+  todosSelector,
+  filterSelector,
+  activeTodosSelector,
+} from '../models/todos/selectors';
+import {
+  toggleTodoRequest,
+  toggleAllRequest,
+  removeTodoRequest,
+} from '../models/todos/actions';
 
-const TodoList = ({ todos, filter, toggleTodoRequest, removeTodoRequest }) => {
+const TodoList = ({
+  todos,
+  activeTodos,
+  filter,
+  toggleTodoRequest,
+  toggleAllRequest,
+  removeTodoRequest,
+}) => {
   const renderTodos = () => {
     if (!todos) {
       return <React.Fragment />;
@@ -42,8 +57,18 @@ const TodoList = ({ todos, filter, toggleTodoRequest, removeTodoRequest }) => {
 
   return (
     <section className="main">
-      <input id="toggle-all" className="toggle-all" type="checkbox" />
-      <label htmlFor="toggle-all"></label>
+      {todos.length > 0 && (
+        <React.Fragment>
+          <input
+            id="toggle-all"
+            className="toggle-all"
+            type="checkbox"
+            checked={activeTodos === 0}
+            onChange={toggleAllRequest}
+          />
+          <label htmlFor="toggle-all"></label>
+        </React.Fragment>
+      )}
       <ul className="todo-list">{renderTodos()}</ul>
     </section>
   );
@@ -51,11 +76,13 @@ const TodoList = ({ todos, filter, toggleTodoRequest, removeTodoRequest }) => {
 
 const mapStateToProps = state => ({
   todos: todosSelector(state),
+  activeTodos: activeTodosSelector(state),
   filter: filterSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleTodoRequest: bindActionCreators(toggleTodoRequest, dispatch),
+  toggleAllRequest: bindActionCreators(toggleAllRequest, dispatch),
   removeTodoRequest: bindActionCreators(removeTodoRequest, dispatch),
 });
 
