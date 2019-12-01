@@ -14,7 +14,7 @@ import {
 } from '../models/todos/selectors';
 
 const propTypes = {
-  totalTodos: PropTypes.array,
+  totalTodos: PropTypes.number,
   activeTodos: PropTypes.number,
   completedTodos: PropTypes.number,
   filter: PropTypes.string,
