@@ -1,11 +1,21 @@
-export const todosSelector = ({ todos }) => todos.items;
+import { createSelector } from 'reselect';
 
-export const totalTodosSelector = ({ todos }) => todos.items.length;
+export const todosSelector = state => state.todos.items;
 
-export const activeTodosSelector = ({ todos }) =>
-  todos.items.filter(todos => !todos.completed).length;
+export const totalTodosSelector = createSelector(
+  todosSelector,
+  todos => todos.length
+);
 
-export const completedTodosSelector = ({ todos }) =>
-  todos.items.filter(todos => todos.completed).length;
+export const activeTodosSelector = createSelector(
+  todosSelector,
+  todos => todos.filter(todos => !todos.completed).length
+);
 
-export const filterSelector = ({ todos }) => todos.filter;
+export const completedTodosSelector = createSelector(
+  totalTodosSelector,
+  activeTodosSelector,
+  (total, active) => total - active
+);
+
+export const filterSelector = state => state.todos.filter;
