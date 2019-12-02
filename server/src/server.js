@@ -8,13 +8,13 @@ import boom from '@hapi/boom';
 import { importSchema } from 'graphql-import';
 import { makeExecutableSchema } from 'graphql-tools';
 
+import './models/todo';
+import './config/connection';
+
 import log from './utils/log';
 import indexRouter from './routes/index';
 import todosRouter from './routes/todos';
 import resolvers from './graphql/resolvers';
-
-import './models/todo';
-import './config/connection';
 
 const app = express();
 
