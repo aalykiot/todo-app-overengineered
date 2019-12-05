@@ -1,19 +1,20 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import boom from '@hapi/boom';
+
+import * as todoService from '../services/todos';
 
 const router = express.Router();
 
-const Todo = mongoose.model('Todo');
+const handleServerError = (err, next) => {
+  console.error(err);
+  next(boom.badImplementation().output);
+};
 
-router.get('/', async (req, res, next) => {
-  try {
-    const todos = await Todo.find({});
-    res.send(todos);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+router.get('/', (req, res, next) => {
+  todoService
+    .find()
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 router.post('/', async (req, res, next) => {
@@ -24,19 +25,11 @@ router.post('/', async (req, res, next) => {
     return;
   }
 
-  try {
-    const todo = new Todo({
-      text,
-      completed: false,
-    });
-
-    await todo.save();
-
-    res.send(todo);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+  todoService
+    .create(text)
+    .then(() => todoService.find())
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 router.put('/toggle/:todoId', async (req, res, next) => {
@@ -47,31 +40,19 @@ router.put('/toggle/:todoId', async (req, res, next) => {
     return;
   }
 
-  try {
-    const doc = await Todo.findById(todoId);
-    const updatedTodo = await Todo.findByIdAndUpdate(
-      todoId,
-      { completed: !doc.completed },
-      { new: true },
-    );
-    res.send(updatedTodo);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+  todoService
+    .toggle(todoId)
+    .then(() => todoService.find())
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 router.put('/toggle-all', async (req, res, next) => {
-  try {
-    const activeTodos = await Todo.count({ completed: false });
-    await Todo.updateMany({}, { completed: activeTodos > 0 });
-
-    const todos = await Todo.find({});
-    res.send(todos);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+  todoService
+    .toggleAll()
+    .then(() => todoService.find())
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 router.put('/:todoId', async (req, res, next) => {
@@ -83,28 +64,19 @@ router.put('/:todoId', async (req, res, next) => {
     return;
   }
 
-  try {
-    const updatedTodo = await Todo.findByIdAndUpdate(
-      todoId,
-      { ...todo },
-      { new: true },
-    );
-    res.send(updatedTodo);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+  todoService
+    .update(todoId, todo)
+    .then(() => todoService.find())
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 router.delete('/completed', async (req, res, next) => {
-  try {
-    const deletedTodos = await Todo.find({ completed: true });
-    await Todo.deleteMany({ completed: true });
-    res.send(deletedTodos);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+  todoService
+    .removeCompleted()
+    .then(() => todoService.find())
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 router.delete('/:todoId', async (req, res, next) => {
@@ -115,14 +87,11 @@ router.delete('/:todoId', async (req, res, next) => {
     return;
   }
 
-  try {
-    const deletedTodo = await Todo.findById(todoId);
-    await Todo.findByIdAndRemove(todoId);
-    res.send(deletedTodo);
-  } catch (err) {
-    console.error(err);
-    next(boom.badImplementation().output);
-  }
+  todoService
+    .remove(todoId)
+    .then(() => todoService.find())
+    .then(data => res.send(data))
+    .catch(err => handleServerError(err, next));
 });
 
 export default router;
