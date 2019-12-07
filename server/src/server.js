@@ -11,7 +11,6 @@ import { makeExecutableSchema } from 'graphql-tools';
 import './models/todo';
 import './config/connection';
 
-import log from './utils/log';
 import indexRouter from './routes/index';
 import todosRouter from './routes/todos';
 import resolvers from './graphql/resolvers';
@@ -50,5 +49,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });

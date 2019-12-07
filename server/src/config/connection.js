@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import log from '../utils/log';
 
 const fallback = 'mongodb://localhost:27017/todo-app';
 
@@ -19,5 +18,5 @@ db.on('error', err => {
 });
 
 db.on('open', () => {
-  log('DB Connection established successfully');
+  console.log('DB Connection established successfully');
 });
