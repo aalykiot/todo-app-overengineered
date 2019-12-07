@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "start:dev": "nodemon index",
+    "start:dev": "nodemon index --ignore 'db_data'",
     "clean": "rm -rf node_modules/",
     "compose": "docker-compose up -d",
     "compose:logs": "docker-compose logs --tail=0 -f database",
