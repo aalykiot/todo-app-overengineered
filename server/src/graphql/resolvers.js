@@ -1,43 +1,29 @@
-import superagent from 'superagent';
-
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000/api';
+import * as todoService from '../services/todos';
 
 const resolvers = {
   Query: {
     todos() {
-      return superagent.get(`${BASE_URL}/todos`).then(res => res.body);
+      return todoService.find();
     },
   },
   Mutation: {
     createTodo(_, { text }) {
-      return superagent
-        .post(`${BASE_URL}/todos`)
-        .send({ text })
-        .then(res => res.body);
+      return todoService.create(text).then(() => todoService.find());
     },
     updateTodo(_, { id, todo }) {
-      return superagent
-        .put(`${BASE_URL}/todos/${id}`)
-        .send({ todo })
-        .then(res => res.body);
+      return todoService.update(id, todo).then(() => todoService.find());
     },
     toggleTodo(_, { id }) {
-      return superagent
-        .put(`${BASE_URL}/todos/toggle/${id}`)
-        .then(res => res.body);
+      return todoService.toggle(id).then(() => todoService.find());
     },
     toggleAll() {
-      return superagent
-        .put(`${BASE_URL}/todos/toggle-all`)
-        .then(res => res.body);
+      return todoService.toggleAll().then(() => todoService.find());
     },
     removeTodo(_, { id }) {
-      return superagent.delete(`${BASE_URL}/todos/${id}`).then(res => res.body);
+      return todoService.remove(id).then(() => todoService.find());
     },
     removeCompleted() {
-      return superagent
-        .delete(`${BASE_URL}/todos/completed`)
-        .then(res => res.body);
+      return todoService.removeCompleted().then(() => todoService.find());
     },
   },
 };
