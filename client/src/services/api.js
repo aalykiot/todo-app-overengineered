@@ -11,7 +11,7 @@ export const addTodo = text => {
 };
 
 export const toggleTodo = todo => {
-  return superagent.put(`${BASE_URL}/todos/${todo._id}`).send({
+  return superagent.put(`${BASE_URL}/todos/${todo.id}`).send({
     todo: {
       ...todo,
       completed: !todo.completed,
@@ -24,7 +24,7 @@ export const toggleAllTodos = () => {
 };
 
 export const removeTodo = todo => {
-  return superagent.delete(`${BASE_URL}/todos/${todo._id}`);
+  return superagent.delete(`${BASE_URL}/todos/${todo.id}`);
 };
 
 export const removeCompletedTodos = () => {

@@ -1,5 +1,3 @@
-import { createReducer } from '@reduxjs/toolkit';
-
 import {
   loadTodosSuccess,
   addTodoSuccess,
@@ -15,30 +13,24 @@ const initState = {
   filter: null,
 };
 
-export default createReducer(initState, {
-  [setFilter.type]: (state, { payload }) => {
-    state.filter = payload;
-  },
-  [loadTodosSuccess.type]: (state, { payload }) => {
-    state.items = payload;
-  },
-  [addTodoSuccess.type]: (state, { payload }) => {
-    state.items.push(payload);
-  },
-  [toggleTodoSuccess.type]: (state, { payload }) => {
-    state.items = state.items.map(todo =>
-      todo._id === payload._id ? payload : todo
-    );
-  },
-  [toggleAllSuccess.type]: (state, { payload }) => {
-    state.items = payload;
-  },
-  [removeTodoSuccess.type]: (state, { payload }) => {
-    state.items = state.items.filter(todo => todo._id !== payload._id);
-  },
-  [removeCompletedSuccess.type]: (state, { payload }) => {
-    state.items = state.items.filter(
-      todo => payload.map(t => t._id).indexOf(todo._id) === -1
-    );
-  },
-});
+export default (state = initState, { type, payload }) => {
+  switch (type) {
+    case setFilter.type:
+      return {
+        ...state,
+        filter: payload,
+      };
+    case loadTodosSuccess.type:
+    case addTodoSuccess.type:
+    case toggleTodoSuccess.type:
+    case toggleAllSuccess.type:
+    case removeTodoSuccess.type:
+    case removeCompletedSuccess.type:
+      return {
+        ...state,
+        items: payload,
+      };
+    default:
+      return state;
+  }
+};

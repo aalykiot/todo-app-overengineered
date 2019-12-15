@@ -56,7 +56,7 @@ const TodoList = ({
           })
           .map(todo => (
             <Todo
-              key={todo._id}
+              key={todo.id}
               todo={todo}
               handleOnChange={() => toggleTodoRequest(todo)}
               handleRemove={() => removeTodoRequest(todo)}
