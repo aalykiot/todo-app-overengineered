@@ -13,12 +13,12 @@ describe('epics', () => {
     it('creates todos/LOAD_TODOS_SUCCESS when fetching todos has been done', done => {
       const data = [
         {
-          _id: 1,
+          id: 1,
           text: 'Todo Number #1',
           completed: false,
         },
         {
-          _id: 2,
+          id: 2,
           text: 'Todo Number #2',
           completed: true,
         },
@@ -59,7 +59,7 @@ describe('epics', () => {
     // Test the successful case of `addTodoEpic`
     it('creates todos/ADD_TODO_SUCCESS when a new todo has been added', done => {
       const data = {
-        _id: 1,
+        id: 1,
         text: 'Todo Number #1',
         completed: false,
       };
@@ -84,13 +84,13 @@ describe('epics', () => {
   describe('toggle-todo', () => {
     it('should call apiService correctly', done => {
       const todo = {
-        _id: 1,
+        id: 1,
         text: 'Todo Number #1',
         completed: false,
       };
 
       const response = {
-        _id: 1,
+        id: 1,
         text: 'Todo Number #1',
         completed: true,
       };
@@ -110,13 +110,13 @@ describe('epics', () => {
 
     it('creates todos/TOGGLE_TODO_SUCCESS when a todo has been toggled', done => {
       const todo = {
-        _id: 1,
+        id: 1,
         text: 'Todo Number #1',
         completed: false,
       };
 
       const response = {
-        _id: 1,
+        id: 1,
         text: 'Todo Number #1',
         completed: true,
       };
@@ -142,12 +142,12 @@ describe('epics', () => {
     it('creates todos/TOGGLE_ALL_SUCCESS when all todos have been toggled', done => {
       const data = [
         {
-          _id: 1,
+          id: 1,
           text: 'Todo Number #1',
           completed: false,
         },
         {
-          _id: 2,
+          id: 2,
           text: 'Todo Number #2',
           completed: true,
         },
@@ -173,7 +173,7 @@ describe('epics', () => {
   describe('remove-todo', () => {
     it('should call apiService correctly', done => {
       const todo = {
-        _id: 1,
+        id: 1,
         text: 'Todo Number #1',
         completed: false,
       };
@@ -218,12 +218,12 @@ describe('epics', () => {
     it('creates todos/REMOVE_COMPLETED_SUCCESS when all completed todos have been removed', done => {
       const data = [
         {
-          _id: 1,
+          id: 1,
           text: 'Todo Number #1',
           completed: true,
         },
         {
-          _id: 2,
+          id: 2,
           text: 'Todo Number #2',
           completed: true,
         },
