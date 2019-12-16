@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { addTodoRequest } from '../models/todos/actions';
+import { addTodo } from '../models/todos/actions';
 
 const propTypes = {
-  addTodoRequest: PropTypes.func,
+  addTodo: PropTypes.func,
 };
 
-const Header = ({ addTodoRequest }) => {
+const Header = ({ addTodo }) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
 
-    addTodoRequest(value);
+    addTodo(value);
     setValue('');
   };
 
@@ -40,7 +40,7 @@ Header.propTypes = propTypes;
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  addTodoRequest: bindActionCreators(addTodoRequest, dispatch),
+  addTodo: bindActionCreators(addTodo, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

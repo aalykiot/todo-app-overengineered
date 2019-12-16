@@ -5,75 +5,73 @@ import { map, switchMap } from 'rxjs/operators';
 import * as apiService from '../../services/api';
 
 import {
-  loadTodosRequest,
-  loadTodosSuccess,
-  addTodoRequest,
-  addTodoSuccess,
-  toggleTodoRequest,
-  toggleTodoSuccess,
-  toggleAllRequest,
-  toggleAllSuccess,
-  removeTodoRequest,
-  removeTodoSuccess,
-  removeCompletedRequest,
-  removeCompletedSuccess,
+  loadTodos,
+  addTodo,
+  toggleTodo,
+  toggleAllTodos,
+  removeTodo,
+  removeCompletedTodos,
 } from './actions';
 
 export const loadTodosEpic = action$ =>
   action$.pipe(
-    ofType(loadTodosRequest.type),
+    ofType(loadTodos.type),
     switchMap(() =>
-      from(apiService.getTodos()).pipe(map(res => loadTodosSuccess(res.body)))
+      from(apiService.getTodos()).pipe(
+        map(res => loadTodos.succeeded(res.body))
+      )
     )
   );
 
 export const addTodoEpic = action$ =>
   action$.pipe(
-    ofType(addTodoRequest.type),
+    ofType(addTodo.type),
     map(action => action.payload),
     switchMap(text =>
-      from(apiService.addTodo(text)).pipe(map(res => addTodoSuccess(res.body)))
+      from(apiService.addTodo(text)).pipe(
+        map(res => addTodo.succeeded(res.body))
+      )
     )
   );
 
 export const toggleTodoEpic = action$ =>
   action$.pipe(
-    ofType(toggleTodoRequest.type),
+    ofType(toggleTodo.type),
     map(action => action.payload),
     switchMap(todo =>
       from(apiService.toggleTodo(todo)).pipe(
-        map(res => toggleTodoSuccess(res.body))
+        map(res => toggleTodo.succeeded(res.body))
       )
     )
   );
 
 export const toggleAllEpic = action$ =>
   action$.pipe(
-    ofType(toggleAllRequest.type),
+    ofType(toggleAllTodos.type),
     switchMap(() =>
       from(apiService.toggleAllTodos()).pipe(
-        map(res => toggleAllSuccess(res.body))
+        map(res => toggleAllTodos.succeeded(res.body))
       )
     )
   );
 
 export const removeTodoEpic = action$ =>
   action$.pipe(
-    ofType(removeTodoRequest.type),
+    ofType(removeTodo.type),
     map(action => action.payload),
     switchMap(todo =>
       from(apiService.removeTodo(todo)).pipe(
-        map(res => removeTodoSuccess(res.body))
+        map(res => removeTodo.succeeded(res.body))
       )
     )
   );
 
 export const removeCompletedEpic = action$ =>
   action$.pipe(
-    ofType(removeCompletedRequest.type),
+    ofType(removeCompletedTodos.type),
     switchMap(() =>
       from(apiService.removeCompletedTodos()).pipe(
-        map(res => removeCompletedSuccess(res.body))
+        map(res => removeCompletedTodos.succeeded(res.body))
       )
     )
   );

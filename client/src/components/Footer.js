@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { setFilter, removeCompletedRequest } from '../models/todos/actions';
+import { setFilter, removeCompletedTodos } from '../models/todos/actions';
 import { completedTodosSelector } from '../models/todos/selectors';
 
 import {
@@ -19,7 +19,7 @@ const propTypes = {
   completedTodos: PropTypes.number,
   filter: PropTypes.string,
   setFilter: PropTypes.func,
-  removeCompletedRequest: PropTypes.func,
+  removeCompletedTodos: PropTypes.func,
 };
 
 const filters = [
@@ -34,7 +34,7 @@ const Footer = ({
   completedTodos,
   filter,
   setFilter,
-  removeCompletedRequest,
+  removeCompletedTodos,
 }) => {
   const renderFilters = () => (
     <React.Fragment>
@@ -64,10 +64,7 @@ const Footer = ({
           </span>
           <ul className="filters">{renderFilters()}</ul>
           {completedTodos > 0 && (
-            <button
-              className="clear-completed"
-              onClick={removeCompletedRequest}
-            >
+            <button className="clear-completed" onClick={removeCompletedTodos}>
               Clear completed
             </button>
           )}
@@ -88,7 +85,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setFilter: bindActionCreators(setFilter, dispatch),
-  removeCompletedRequest: bindActionCreators(removeCompletedRequest, dispatch),
+  removeCompletedTodos: bindActionCreators(removeCompletedTodos, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);

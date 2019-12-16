@@ -12,27 +12,27 @@ import {
 } from '../models/todos/selectors';
 
 import {
-  toggleTodoRequest,
-  toggleAllRequest,
-  removeTodoRequest,
+  toggleTodo,
+  toggleAllTodos,
+  removeTodo,
 } from '../models/todos/actions';
 
 const propTypes = {
   todos: PropTypes.array,
   activeTodos: PropTypes.number,
   filter: PropTypes.string,
-  toggleTodoRequest: PropTypes.func,
-  toggleAllRequest: PropTypes.func,
-  removeTodoRequest: PropTypes.func,
+  toggleTodo: PropTypes.func,
+  toggleAllTodos: PropTypes.func,
+  removeTodo: PropTypes.func,
 };
 
 const TodoList = ({
   todos,
   activeTodos,
   filter,
-  toggleTodoRequest,
-  toggleAllRequest,
-  removeTodoRequest,
+  toggleTodo,
+  toggleAllTodos,
+  removeTodo,
 }) => {
   const renderTodos = () => {
     if (!todos) {
@@ -58,8 +58,8 @@ const TodoList = ({
             <Todo
               key={todo.id}
               todo={todo}
-              handleOnChange={() => toggleTodoRequest(todo)}
-              handleRemove={() => removeTodoRequest(todo)}
+              handleOnChange={() => toggleTodo(todo)}
+              handleRemove={() => removeTodo(todo)}
             />
           ))}
       </React.Fragment>
@@ -75,7 +75,7 @@ const TodoList = ({
             className="toggle-all"
             type="checkbox"
             checked={activeTodos === 0}
-            onChange={toggleAllRequest}
+            onChange={toggleAllTodos}
           />
           <label htmlFor="toggle-all"></label>
         </React.Fragment>
@@ -94,9 +94,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleTodoRequest: bindActionCreators(toggleTodoRequest, dispatch),
-  toggleAllRequest: bindActionCreators(toggleAllRequest, dispatch),
-  removeTodoRequest: bindActionCreators(removeTodoRequest, dispatch),
+  toggleTodo: bindActionCreators(toggleTodo, dispatch),
+  toggleAllTodos: bindActionCreators(toggleAllTodos, dispatch),
+  removeTodo: bindActionCreators(removeTodo, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

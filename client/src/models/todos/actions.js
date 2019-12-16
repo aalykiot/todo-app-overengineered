@@ -1,25 +1,15 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction, createActionEvent } from '../../utils/actions';
 
 export const setFilter = createAction('todos/SET_FILTER');
 
-export const loadTodosRequest = createAction('todos/LOAD_TODOS_REQUEST');
-export const loadTodosSuccess = createAction('todos/LOAD_TODOS_SUCCESS');
+export const loadTodos = createActionEvent('todos/LOAD_TODOS');
 
-export const addTodoRequest = createAction('todos/ADD_TODO_REQUEST');
-export const addTodoSuccess = createAction('todos/ADD_TODO_SUCCESS');
+export const addTodo = createActionEvent('todos/ADD_TODO');
 
-export const toggleTodoRequest = createAction('todos/TOGGLE_TODO_REQUEST');
-export const toggleTodoSuccess = createAction('todos/TOGGLE_TODO_SUCCESS');
+export const toggleTodo = createActionEvent('todos/TOGGLE_TODO');
 
-export const toggleAllRequest = createAction('todos/TOGGLE_ALL_REQUEST');
-export const toggleAllSuccess = createAction('todos/TOGGLE_ALL_SUCCESS');
+export const toggleAllTodos = createActionEvent('todos/TOGGLE_ALL');
 
-export const removeTodoRequest = createAction('todos/REMOVE_TODO_REQUEST');
-export const removeTodoSuccess = createAction('todos/REMOVE_TODO_SUCCESS');
+export const removeTodo = createActionEvent('todo/REMOVE_TODO');
 
-export const removeCompletedRequest = createAction(
-  'todos/REMOVE_COMPLETED_REQUEST'
-);
-export const removeCompletedSuccess = createAction(
-  'todos/REMOVE_COMPLETED_SUCCESS'
-);
+export const removeCompletedTodos = createActionEvent('todo/REMOVE_COMPLETED');

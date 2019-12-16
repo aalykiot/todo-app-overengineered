@@ -2,17 +2,12 @@ import _ from 'lodash';
 import shortid from 'shortid';
 
 import {
-  loadTodosSuccess,
-  addTodoRequest,
-  addTodoSuccess,
-  toggleTodoRequest,
-  toggleTodoSuccess,
-  toggleAllRequest,
-  toggleAllSuccess,
-  removeTodoRequest,
-  removeTodoSuccess,
-  removeCompletedRequest,
-  removeCompletedSuccess,
+  loadTodos,
+  addTodo,
+  toggleTodo,
+  toggleAllTodos,
+  removeTodo,
+  removeCompletedTodos,
   setFilter,
 } from './actions';
 
@@ -23,7 +18,7 @@ const initState = {
 
 export default (state = initState, { type, payload }) => {
   switch (type) {
-    case addTodoRequest.type: {
+    case addTodo.type: {
       const todo = {
         id: shortid.generate(),
         text: payload,
@@ -35,7 +30,7 @@ export default (state = initState, { type, payload }) => {
         items: [...state.items, todo],
       };
     }
-    case toggleTodoRequest.type:
+    case toggleTodo.type:
       return {
         ...state,
         items: state.items.map(item =>
@@ -44,7 +39,7 @@ export default (state = initState, { type, payload }) => {
             : item
         ),
       };
-    case toggleAllRequest.type: {
+    case toggleAllTodos.type: {
       const notCompletedTodos = state.items.filter(
         item => item.completed === false
       ).length;
@@ -56,12 +51,12 @@ export default (state = initState, { type, payload }) => {
         })),
       };
     }
-    case removeTodoRequest.type:
+    case removeTodo.type:
       return {
         ...state,
         items: state.items.filter(item => item.id !== payload.id),
       };
-    case removeCompletedRequest.type:
+    case removeCompletedTodos.type:
       return {
         ...state,
         items: state.items.filter(item => !item.completed),
@@ -71,12 +66,12 @@ export default (state = initState, { type, payload }) => {
         ...state,
         filter: payload,
       };
-    case loadTodosSuccess.type:
-    case addTodoSuccess.type:
-    case toggleTodoSuccess.type:
-    case toggleAllSuccess.type:
-    case removeTodoSuccess.type:
-    case removeCompletedSuccess.type:
+    case loadTodos.succeeded.type:
+    case addTodo.succeeded.type:
+    case toggleTodo.succeeded.type:
+    case toggleAllTodos.succeeded.type:
+    case removeTodo.succeeded.type:
+    case removeCompletedTodos.succeeded.type:
       return {
         ...state,
         items: _.isEqual(state.items, payload) ? state.items : payload,
