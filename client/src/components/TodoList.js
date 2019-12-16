@@ -5,11 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import Todo from './Todo';
 
-import {
-  todosSelector,
-  filterSelector,
-  activeTodosSelector,
-} from '../models/todos/selectors';
+import { getTodos, getActiveTodos, getFilter } from '../models/todos/selectors';
 
 import {
   toggleTodo,
@@ -88,9 +84,9 @@ const TodoList = ({
 TodoList.propTypes = propTypes;
 
 const mapStateToProps = state => ({
-  todos: todosSelector(state),
-  activeTodos: activeTodosSelector(state),
-  filter: filterSelector(state),
+  todos: getTodos(state),
+  activeTodos: getActiveTodos(state),
+  filter: getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({

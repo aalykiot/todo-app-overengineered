@@ -5,12 +5,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { setFilter, removeCompletedTodos } from '../models/todos/actions';
-import { completedTodosSelector } from '../models/todos/selectors';
 
 import {
-  totalTodosSelector,
-  activeTodosSelector,
-  filterSelector,
+  getTotalTodos,
+  getActiveTodos,
+  getCompletedTodos,
+  getFilter,
 } from '../models/todos/selectors';
 
 const propTypes = {
@@ -77,10 +77,10 @@ const Footer = ({
 Footer.propTypes = propTypes;
 
 const mapStateToProps = state => ({
-  totalTodos: totalTodosSelector(state),
-  activeTodos: activeTodosSelector(state),
-  completedTodos: completedTodosSelector(state),
-  filter: filterSelector(state),
+  totalTodos: getTotalTodos(state),
+  activeTodos: getActiveTodos(state),
+  completedTodos: getCompletedTodos(state),
+  filter: getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({

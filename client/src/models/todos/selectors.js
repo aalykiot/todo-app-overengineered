@@ -1,21 +1,18 @@
 import { createSelector } from 'reselect';
 
-export const todosSelector = state => state.todos.items;
+export const getTodos = state => state.todos.items;
 
-export const totalTodosSelector = createSelector(
-  todosSelector,
-  todos => todos.length
-);
+export const getTotalTodos = createSelector(getTodos, todos => todos.length);
 
-export const activeTodosSelector = createSelector(
-  todosSelector,
+export const getActiveTodos = createSelector(
+  getTodos,
   todos => todos.filter(todos => !todos.completed).length
 );
 
-export const completedTodosSelector = createSelector(
-  totalTodosSelector,
-  activeTodosSelector,
+export const getCompletedTodos = createSelector(
+  getTotalTodos,
+  getActiveTodos,
   (total, active) => total - active
 );
 
-export const filterSelector = state => state.todos.filter;
+export const getFilter = state => state.todos.filter;
