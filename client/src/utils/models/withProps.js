@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 const EMPTY = {};
 
-const createProps = selectors => state =>
+const createProps = (selectors = EMPTY) => state =>
   Object.entries(selectors).reduce(
     (props, [key, selector]) => ({
       ...props,
@@ -11,7 +11,7 @@ const createProps = selectors => state =>
     {}
   );
 
-const createActionProps = actions => dispatch =>
+const createActionProps = (actions = EMPTY) => dispatch =>
   Object.entries(actions).reduce(
     (props, [key, action]) => ({
       ...props,
