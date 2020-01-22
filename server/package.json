@@ -1,11 +1,12 @@
 {
-  "name": "todo-app",
+  "name": "todo-app-overengineered-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index",
     "start:dev": "nodemon index --ignore 'db_data'",
+    "lint": "eslint .",
     "clean": "rm -rf node_modules/",
     "compose": "docker-compose up -d",
     "compose:logs": "docker-compose logs --tail=0 -f database",
@@ -14,6 +15,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
@@ -23,7 +29,8 @@
     "@types/node": "^12.12.14",
     "eslint": "^6.7.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^4.2.0"
   },
   "dependencies": {
     "@hapi/boom": "^8.0.1",
