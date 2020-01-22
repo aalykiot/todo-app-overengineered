@@ -1,17 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import { setFilter, removeCompletedTodos } from '../models/todos/actions';
-
-import {
-  getTotalTodos,
-  getActiveTodos,
-  getCompletedTodos,
-  getFilter,
-} from '../models/todos/selectors';
 
 const propTypes = {
   totalTodos: PropTypes.number,
@@ -76,16 +65,4 @@ const Footer = ({
 
 Footer.propTypes = propTypes;
 
-const mapStateToProps = state => ({
-  totalTodos: getTotalTodos(state),
-  activeTodos: getActiveTodos(state),
-  completedTodos: getCompletedTodos(state),
-  filter: getFilter(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  setFilter: bindActionCreators(setFilter, dispatch),
-  removeCompletedTodos: bindActionCreators(removeCompletedTodos, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default Footer;

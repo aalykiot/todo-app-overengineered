@@ -1,17 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import Todo from './Todo';
-
-import { getTodos, getActiveTodos, getFilter } from '../models/todos/selectors';
-
-import {
-  toggleTodo,
-  toggleAllTodos,
-  removeTodo,
-} from '../models/todos/actions';
+import Todo from './components/Todo';
 
 const propTypes = {
   todos: PropTypes.array,
@@ -83,16 +73,4 @@ const TodoList = ({
 
 TodoList.propTypes = propTypes;
 
-const mapStateToProps = state => ({
-  todos: getTodos(state),
-  activeTodos: getActiveTodos(state),
-  filter: getFilter(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  toggleTodo: bindActionCreators(toggleTodo, dispatch),
-  toggleAllTodos: bindActionCreators(toggleAllTodos, dispatch),
-  removeTodo: bindActionCreators(removeTodo, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;

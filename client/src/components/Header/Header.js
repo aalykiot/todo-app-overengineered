@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import { addTodo } from '../models/todos/actions';
 
 const propTypes = {
   addTodo: PropTypes.func,
@@ -37,10 +33,4 @@ const Header = ({ addTodo }) => {
 
 Header.propTypes = propTypes;
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = dispatch => ({
-  addTodo: bindActionCreators(addTodo, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
