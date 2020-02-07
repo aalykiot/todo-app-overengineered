@@ -2,15 +2,15 @@ import superagent from 'superagent';
 
 const BASE_URL = 'http://localhost:5000/api';
 
-export const getTodos = () => {
+const getTodos = () => {
   return superagent.get(`${BASE_URL}/todos`);
 };
 
-export const addTodo = text => {
+const addTodo = text => {
   return superagent.post(`${BASE_URL}/todos`).send({ text });
 };
 
-export const toggleTodo = todo => {
+const toggleTodo = todo => {
   return superagent.put(`${BASE_URL}/todos/${todo.id}`).send({
     todo: {
       ...todo,
@@ -19,14 +19,23 @@ export const toggleTodo = todo => {
   });
 };
 
-export const toggleAllTodos = () => {
+const toggleAllTodos = () => {
   return superagent.put(`${BASE_URL}/todos/toggle-all`);
 };
 
-export const removeTodo = todo => {
+const removeTodo = todo => {
   return superagent.delete(`${BASE_URL}/todos/${todo.id}`);
 };
 
-export const removeCompletedTodos = () => {
+const removeCompletedTodos = () => {
   return superagent.delete(`${BASE_URL}/todos/completed`);
+};
+
+export {
+  getTodos,
+  addTodo,
+  toggleTodo,
+  toggleAllTodos,
+  removeTodo,
+  removeCompletedTodos,
 };

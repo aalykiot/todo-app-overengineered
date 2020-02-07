@@ -1,8 +1,8 @@
 import { ofType } from 'redux-observable';
-import { from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import * as apiService from '../../services/api';
+import { networkRequest } from '../../utils/operators';
 
 import {
   loadTodos,
@@ -13,65 +13,50 @@ import {
   removeCompletedTodos,
 } from './actions';
 
-export const loadTodosEpic = action$ =>
+const loadTodosEpic = action$ =>
   action$.pipe(
     ofType(loadTodos.type),
-    switchMap(() =>
-      from(apiService.getTodos()).pipe(
-        map(res => loadTodos.succeeded(res.body))
-      )
-    )
+    networkRequest(apiService.getTodos, loadTodos)
   );
 
-export const addTodoEpic = action$ =>
+const addTodoEpic = action$ =>
   action$.pipe(
     ofType(addTodo.type),
     map(action => action.payload),
-    switchMap(text =>
-      from(apiService.addTodo(text)).pipe(
-        map(res => addTodo.succeeded(res.body))
-      )
-    )
+    networkRequest(apiService.addTodo, addTodo)
   );
 
-export const toggleTodoEpic = action$ =>
+const toggleTodoEpic = action$ =>
   action$.pipe(
     ofType(toggleTodo.type),
     map(action => action.payload),
-    switchMap(todo =>
-      from(apiService.toggleTodo(todo)).pipe(
-        map(res => toggleTodo.succeeded(res.body))
-      )
-    )
+    networkRequest(apiService.toggleTodo, toggleTodo)
   );
 
-export const toggleAllEpic = action$ =>
+const toggleAllEpic = action$ =>
   action$.pipe(
     ofType(toggleAllTodos.type),
-    switchMap(() =>
-      from(apiService.toggleAllTodos()).pipe(
-        map(res => toggleAllTodos.succeeded(res.body))
-      )
-    )
+    networkRequest(apiService.toggleAllTodos, toggleAllTodos)
   );
 
-export const removeTodoEpic = action$ =>
+const removeTodoEpic = action$ =>
   action$.pipe(
     ofType(removeTodo.type),
     map(action => action.payload),
-    switchMap(todo =>
-      from(apiService.removeTodo(todo)).pipe(
-        map(res => removeTodo.succeeded(res.body))
-      )
-    )
+    networkRequest(apiService.removeTodo, removeTodo)
   );
 
-export const removeCompletedEpic = action$ =>
+const removeCompletedEpic = action$ =>
   action$.pipe(
     ofType(removeCompletedTodos.type),
-    switchMap(() =>
-      from(apiService.removeCompletedTodos()).pipe(
-        map(res => removeCompletedTodos.succeeded(res.body))
-      )
-    )
+    networkRequest(apiService.removeCompletedTodos, removeCompletedTodos)
   );
+
+export {
+  loadTodosEpic,
+  addTodoEpic,
+  toggleTodoEpic,
+  toggleAllEpic,
+  removeTodoEpic,
+  removeCompletedEpic,
+};
