@@ -1,12 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import Header from './components/Header';
-import TodoList from './components/TodoList';
-import Footer from './components/Footer';
+import Header from 'components/Header';
+import TodoList from 'components/TodoList';
+import Footer from 'components/Footer';
 
-import store from './store/configureStore';
-import { loadTodos } from './models/todos/actions';
+import store from 'store/configureStore';
+import { loadTodos } from 'models/todos/actions';
 
 store.dispatch(loadTodos());
 

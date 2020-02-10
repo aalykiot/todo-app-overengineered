@@ -1,8 +1,8 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 
-import * as apiService from '../../services/api';
-import { networkRequest } from '../../utils/operators';
+import * as apiService from 'services/api';
+import { networkRequest } from 'utils/operators';
 
 import {
   loadTodos,

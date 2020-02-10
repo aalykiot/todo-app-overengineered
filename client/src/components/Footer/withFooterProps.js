@@ -1,13 +1,13 @@
-import withProps from '../../utils/models/withProps';
+import withProps from 'utils/models/withProps';
 
 import {
   getTotalTodos as totalTodos,
   getActiveTodos as activeTodos,
   getCompletedTodos as completedTodos,
   getFilter as filter,
-} from '../../models/todos/selectors';
+} from 'models/todos/selectors';
 
-import { setFilter, removeCompletedTodos } from '../../models/todos/actions';
+import { setFilter, removeCompletedTodos } from 'models/todos/actions';
 
 const withFooterProps = withProps(
   {

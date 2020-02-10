@@ -1,12 +1,12 @@
 import { of } from 'rxjs';
 
-import * as actions from '../models/todos/actions';
-import * as epics from '../models/todos/epics';
-import * as apiService from '../services/api';
+import * as actions from 'models/todos/actions';
+import * as epics from 'models/todos/epics';
+import * as apiService from 'services/api';
 
 console.error = () => {};
 
-jest.mock('../services/api');
+jest.mock('services/api');
 
 describe('epics', () => {
   describe('load-todos', () => {

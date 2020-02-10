@@ -1,4 +1,4 @@
-import { createAction, createActionEvent } from '../../utils/actions';
+import { createAction, createActionEvent } from 'utils/actions';
 
 const setFilter = createAction('todos/SET_FILTER');
 

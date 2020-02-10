@@ -1,4 +1,4 @@
-import { createAction } from '../../utils/actions';
+import { createAction } from 'utils/actions';
 
 const networkRequest = createAction('system/NETWORK_REQUEST');
 
