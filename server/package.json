@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "start:dev": "nodemon index --ignore 'db_data'",
+    "dev": "nodemon index --ignore 'db_data'",
     "lint": "eslint .",
     "clean": "rm -rf node_modules/",
     "compose": "docker-compose up -d",
@@ -36,8 +36,10 @@
     "@babel/register": "^7.7.4",
     "@types/graphql": "^14.5.0",
     "@types/node": "^12.12.14",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^6.7.1",
     "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-import-resolver-babel-module": "^5.1.2",
     "eslint-plugin-import": "^2.18.2"
   }
 }

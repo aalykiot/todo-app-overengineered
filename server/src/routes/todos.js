@@ -1,7 +1,7 @@
 import express from 'express';
 import boom from '@hapi/boom';
 
-import * as todoService from '../services/todos';
+import * as todoService from 'services/todos';
 
 const router = express.Router();
 

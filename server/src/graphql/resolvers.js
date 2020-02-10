@@ -1,4 +1,4 @@
-import * as todoService from '../services/todos';
+import * as todoService from 'services/todos';
 
 const resolvers = {
   Query: {
