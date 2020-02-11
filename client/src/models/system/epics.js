@@ -1,14 +1,16 @@
 import { ofType } from 'redux-observable';
 import { from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap, mergeMap } from 'rxjs/operators';
 
-import { networkRequest } from './actions';
+import { networkRequest, networkResponse } from './actions';
 
 const networkRequestEpic = action$ =>
   action$.pipe(
     ofType(networkRequest.type),
     switchMap(({ payload: { service, data, action } }) =>
-      from(service(data)).pipe(map(res => action.succeeded(res.body)))
+      from(service(data)).pipe(
+        mergeMap(res => [networkResponse(), action.succeeded(res.body)])
+      )
     )
   );
 
