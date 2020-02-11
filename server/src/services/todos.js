@@ -29,7 +29,7 @@ export const toggle = async todoId => {
 };
 
 export const toggleAll = async () => {
-  const activeTodos = await Todo.count({ completed: false });
+  const activeTodos = await Todo.countDocuments({ completed: false });
   const transaction = await Todo.updateMany({}, { completed: activeTodos > 0 });
   return transaction;
 };
