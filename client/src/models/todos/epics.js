@@ -3,7 +3,7 @@ import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import * as apiService from 'services/api';
-import { networkRequest } from 'utils/operators';
+import { request } from 'utils/operators';
 
 import {
   loadTodos,
@@ -16,35 +16,35 @@ import {
 
 const loadTodosEpic = pipe(
   ofType(loadTodos.type),
-  networkRequest(apiService.getTodos, loadTodos)
+  request(apiService.getTodos, loadTodos)
 );
 
 const addTodoEpic = pipe(
   ofType(addTodo.type),
   map(action => action.payload),
-  networkRequest(apiService.addTodo, addTodo)
+  request(apiService.addTodo, addTodo)
 );
 
 const toggleTodoEpic = pipe(
   ofType(toggleTodo.type),
   map(action => action.payload),
-  networkRequest(apiService.toggleTodo, toggleTodo)
+  request(apiService.toggleTodo, toggleTodo)
 );
 
 const toggleAllEpic = pipe(
   ofType(toggleAllTodos.type),
-  networkRequest(apiService.toggleAllTodos, toggleAllTodos)
+  request(apiService.toggleAllTodos, toggleAllTodos)
 );
 
 const removeTodoEpic = pipe(
   ofType(removeTodo.type),
   map(action => action.payload),
-  networkRequest(apiService.removeTodo, removeTodo)
+  request(apiService.removeTodo, removeTodo)
 );
 
 const removeCompletedEpic = pipe(
   ofType(removeCompletedTodos.type),
-  networkRequest(apiService.removeCompletedTodos, removeCompletedTodos)
+  request(apiService.removeCompletedTodos, removeCompletedTodos)
 );
 
 export {

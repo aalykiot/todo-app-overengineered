@@ -1,6 +1,7 @@
-import { createAction } from 'utils/actions';
+import { createAction, createActionEvent } from 'utils/actions';
 
-const networkRequest = createAction('system/NETWORK_REQUEST');
-const networkResponse = createAction('system/NETWORK_RESPONSE');
+const request = createActionEvent('system/REQUEST');
 
-export { networkRequest, networkResponse };
+const clearError = createAction('system/CLEAR_ERROR');
+
+export { request, clearError };

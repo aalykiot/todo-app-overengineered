@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from 'components/Header';
 import TodoList from 'components/TodoList';
 import Footer from 'components/Footer';
+import ErrorList from 'components/ErrorList';
 
 import { ClassicSpinner } from 'react-spinners-kit';
 
@@ -21,6 +22,7 @@ const App = ({ loading }) => (
     <div className="networkSpinner">
       <ClassicSpinner size={25} color="#999" loading={loading} />
     </div>
+    <ErrorList />
   </React.Fragment>
 );
 

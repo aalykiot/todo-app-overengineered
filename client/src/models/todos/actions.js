@@ -10,9 +10,9 @@ const toggleTodo = createActionEvent('todos/TOGGLE_TODO');
 
 const toggleAllTodos = createActionEvent('todos/TOGGLE_ALL');
 
-const removeTodo = createActionEvent('todo/REMOVE_TODO');
+const removeTodo = createActionEvent('todos/REMOVE_TODO');
 
-const removeCompletedTodos = createActionEvent('todo/REMOVE_COMPLETED');
+const removeCompletedTodos = createActionEvent('todos/REMOVE_COMPLETED');
 
 export {
   setFilter,

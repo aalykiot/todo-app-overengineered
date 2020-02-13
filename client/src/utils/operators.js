@@ -1,14 +1,14 @@
 import { map } from 'rxjs/operators';
 
-import { networkRequest as networkRequestAction } from 'models/system/actions';
+import { request as requestAction } from 'models/system/actions';
 
-const networkRequest = (service, action) =>
+const request = (service, action) =>
   map(data =>
-    networkRequestAction({
+    requestAction({
       service,
       data,
       action,
     })
   );
 
-export { networkRequest };
+export { request };
