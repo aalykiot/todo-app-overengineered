@@ -14,15 +14,7 @@ const addTodo = text => {
 };
 
 const toggleTodo = todo => {
-  return superagent
-    .put(`${BASE_URL}/todos/${todo.id}`)
-    .send({
-      todo: {
-        ...todo,
-        completed: !todo.completed,
-      },
-    })
-    .then(res => res.body);
+  return superagent.put(`${BASE_URL}/todos/${todo.id}`).then(res => res.body);
 };
 
 const toggleAllTodos = () => {

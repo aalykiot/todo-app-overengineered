@@ -27,7 +27,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
+    "apollo-boost": "^0.4.7",
     "classnames": "^2.2.6",
+    "graphql": "^14.6.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

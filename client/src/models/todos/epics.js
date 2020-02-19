@@ -2,7 +2,9 @@ import { ofType } from 'redux-observable';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import * as apiService from 'services/api';
+// import * as apiService from 'services/api';
+import * as graphqlService from 'services/graphql';
+
 import { request } from 'utils/operators';
 
 import {
@@ -16,35 +18,35 @@ import {
 
 const loadTodosEpic = pipe(
   ofType(loadTodos.type),
-  request(apiService.getTodos, loadTodos)
+  request(graphqlService.getTodos, loadTodos)
 );
 
 const addTodoEpic = pipe(
   ofType(addTodo.type),
   map(action => action.payload),
-  request(apiService.addTodo, addTodo)
+  request(graphqlService.addTodo, addTodo)
 );
 
 const toggleTodoEpic = pipe(
   ofType(toggleTodo.type),
   map(action => action.payload),
-  request(apiService.toggleTodo, toggleTodo)
+  request(graphqlService.toggleTodo, toggleTodo)
 );
 
 const toggleAllEpic = pipe(
   ofType(toggleAllTodos.type),
-  request(apiService.toggleAllTodos, toggleAllTodos)
+  request(graphqlService.toggleAllTodos, toggleAllTodos)
 );
 
 const removeTodoEpic = pipe(
   ofType(removeTodo.type),
   map(action => action.payload),
-  request(apiService.removeTodo, removeTodo)
+  request(graphqlService.removeTodo, removeTodo)
 );
 
 const removeCompletedEpic = pipe(
   ofType(removeCompletedTodos.type),
-  request(apiService.removeCompletedTodos, removeCompletedTodos)
+  request(graphqlService.removeCompletedTodos, removeCompletedTodos)
 );
 
 export {

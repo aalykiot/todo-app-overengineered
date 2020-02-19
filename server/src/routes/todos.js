@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
     .catch(err => handleServerError(err, next));
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
   const { text } = req.body;
 
   if (!text) {
@@ -32,7 +32,7 @@ router.post('/', async (req, res, next) => {
     .catch(err => handleServerError(err, next));
 });
 
-router.put('/toggle/:todoId', async (req, res, next) => {
+router.put('/:todoId', (req, res, next) => {
   const { todoId } = req.params;
 
   if (!todoId) {
