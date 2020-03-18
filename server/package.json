@@ -8,9 +8,8 @@
     "dev": "nodemon index --ignore 'db_data'",
     "lint": "eslint .",
     "clean": "rm -rf node_modules/",
-    "compose": "docker-compose up -d",
-    "compose:logs": "docker-compose logs --tail=0 -f database",
-    "compose:stop": "docker-compose stop"
+    "compose": "docker-compose up",
+    "compose:stop": "docker-compose down"
   },
   "keywords": [],
   "author": "",
